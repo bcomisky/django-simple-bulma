@@ -45,7 +45,7 @@
 	url = https://github.com/Wikiki/bulma-ribbon.git
 [submodule "bulma-steps"]
 	path = django_simple_bulma/extensions/bulma-steps
-	url = https://github.com/Wikiki/bulma-steps.git
+	url = https://github.com/aramvisser/bulma-steps.git
 [submodule "bulma-timeline"]
 	path = django_simple_bulma/extensions/bulma-timeline
 	url = https://github.com/Wikiki/bulma-timeline.git
