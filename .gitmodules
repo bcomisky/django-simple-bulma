@@ -52,3 +52,6 @@
 [submodule "bulma-tooltip"]
 	path = django_simple_bulma/extensions/bulma-tooltip
 	url = https://github.com/creativebulma/bulma-tooltip.git
+[submodule "django_simple_bulma/extensions/bulma-steps"]
+	path = django_simple_bulma/extensions/bulma-steps
+	url = https://github.com/aramvisser/bulma-steps.git
