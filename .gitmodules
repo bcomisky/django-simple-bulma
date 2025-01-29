@@ -46,9 +46,6 @@
 [submodule "bulma-steps"]
 	path = django_simple_bulma/extensions/bulma-steps
 	url = https://github.com/Wikiki/bulma-steps.git
-[submodule "bulma-steps-aramvisser"]
-	path = django_simple_bulma/extensions/bulma-steps-aramvisser
-	url = https://github.com/aramvisser/bulma-steps.git
 [submodule "bulma-timeline"]
 	path = django_simple_bulma/extensions/bulma-timeline
 	url = https://github.com/Wikiki/bulma-timeline.git
@@ -58,3 +55,6 @@
 [submodule "bulma-tooltip"]
 	path = django_simple_bulma/extensions/bulma-tooltip
 	url = https://github.com/creativebulma/bulma-tooltip.git
+[submodule "django_simple_bulma/extensions/bulma-steps-aramvisser"]
+	path = django_simple_bulma/extensions/bulma-steps-aramvisser
+	url = https://github.com/aramvisser/bulma-steps.git
