@@ -92,6 +92,30 @@ class SimpleBulmaFinder(BaseFinder):
             if directory in path.parents:
                 return path.relative_to(directory)
 
+    def _get_bulma_imports(self, relative=True) -> str:
+
+        """Return a string that, in SASS, imports all bulma files."""
+
+        # SASS wants paths with forward slash:
+        if relative:
+            sass_bulma_submodule_path = self.bulma_submodule_path \
+                .relative_to(simple_bulma_path).as_posix()
+        else:
+            sass_bulma_submodule_path = self.bulma_submodule_path.as_posix()
+
+        bulma_string = f"@import '{sass_bulma_submodule_path}/utilities/_all';\n"
+
+        # Now load bulma dynamically.
+        for dirname in self.bulma_submodule_path.iterdir():
+
+            # We already added this earlier
+            if dirname.name == "utilities":
+                continue
+
+            bulma_string += f"@import '{sass_bulma_submodule_path}/{dirname.name}/_all';\n"
+
+        return bulma_string
+
     def _get_bulma_css(self) -> List[str]:
         """Compiles the bulma css files for each theme and returns their relative paths."""
         # If the user has the sass module installed in addition to libsass,
@@ -106,20 +130,7 @@ class SimpleBulmaFinder(BaseFinder):
                 "not both `sass` and `libsass`, or this application will not work."
             )
 
-        # SASS wants paths with forward slash:
-        sass_bulma_submodule_path = self.bulma_submodule_path \
-            .relative_to(simple_bulma_path).as_posix()
-
-        bulma_string = f"@import '{sass_bulma_submodule_path}/utilities/_all';\n"
-
-        # Now load bulma dynamically.
-        for dirname in self.bulma_submodule_path.iterdir():
-
-            # We already added this earlier
-            if dirname.name == "utilities":
-                continue
-
-            bulma_string += f"@import '{sass_bulma_submodule_path}/{dirname.name}/_all';\n"
+        bulma_string = self._get_bulma_imports()
 
         # Now load in the extensions that the user wants
         extensions_string = self._get_extension_imports()
@@ -179,8 +190,12 @@ class SimpleBulmaFinder(BaseFinder):
             absolute_path = str(absolute_path).replace("\\", "/")
             relative_path = Path(relative_path)
 
+            # add bulma and bulma extensions imports so we can use those
+            # variables in our SASS
+            scss_string = self._get_bulma_imports(relative=False) + self._get_extension_imports()
+
             # Now load up the scss file
-            scss_string = f'@import "{absolute_path}";'
+            scss_string += f'@import "{absolute_path}";'
 
             # Store this as a css file - we don't check and raise here because it would have
             # already happened earlier, during the Bulma compilation
