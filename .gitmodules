@@ -1,6 +1,7 @@
 [submodule "bulma"]
 	path = django_simple_bulma/bulma
 	url = https://github.com/jgthms/bulma.git
+   branch = v0.9.4
 [submodule "bulma-tagsinput"]
 	path = django_simple_bulma/extensions/bulma-tagsinput
 	url = https://github.com/CreativeBulma/bulma-tagsinput.git
