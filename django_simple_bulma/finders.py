@@ -59,7 +59,8 @@ class SimpleBulmaFinder(BaseFinder):
 
             if is_enabled(ext):
                 for src in get_sass_files(ext):
-                    scss_imports += f"@import '{src.as_posix()}';\n"
+                    #scss_imports += f"@import '{src.as_posix()}';\n"
+                    scss_imports += f"@import '{simple_bulma_path / src}';\n"
 
         return scss_imports
 
